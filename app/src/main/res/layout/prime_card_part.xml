@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/prime_card_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/card_margin"
+        android:layout_marginStart="@dimen/card_margin">
+
+        <ImageView
+                android:layout_width="@dimen/card_item_part_image_width"
+                android:layout_height="@dimen/card_item_part_image_height"
+                app:srcCompat="@color/cardview_shadow_start_color"
+                android:id="@+id/prime_card_part_image"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/prime_card_part_name"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/card_item_chance_size"
+                android:id="@+id/prime_card_part_chance"/>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_margin"
+        android:layout_marginBottom="@dimen/card_margin"
+        android:layout_marginLeft="@dimen/card_margin"
+        android:layout_marginRight="@dimen/card_margin"
+        android:id="@+id/prime_card">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/prime_card_image_group">
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_image_height"
+                    app:srcCompat="@color/cardview_shadow_start_color"
+                    android:id="@+id/prime_card_image"/>
+
+            <ImageView
+                    android:layout_width="@dimen/card_vaulted_width"
+                    android:layout_height="@dimen/card_vaulted_height"
+                    app:srcCompat="@color/cardview_shadow_start_color"
+                    android:layout_margin="@dimen/card_content_padding"
+                    android:layout_gravity="end|top"
+                    android:id="@+id/prime_card_vaulted"/>
+
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    android:padding="@dimen/card_content_padding"
+                    android:background="@color/colorBlack80"
+                    android:layout_gravity="center|bottom"
+                    android:textSize="@dimen/card_title_size"
+                    android:id="@+id/prime_card_title"/>
+
+        </FrameLayout>
+
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_content_padding"
+                android:layout_below="@id/prime_card_image_group">
+
+            <HorizontalScrollView
+                    android:layout_marginTop="@dimen/card_margin"
+                    android:scrollbarDefaultDelayBeforeFade="0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                <LinearLayout
+                        android:id="@+id/prime_card_parts"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
