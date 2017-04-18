@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView itemList = (RecyclerView)findViewById(R.id.prime_card_list);
+        RecyclerView itemList = (RecyclerView)findViewById(R.id.home_list);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         itemList.setLayoutManager(llm);
 
-        PrimeCardAdapter adapter = new PrimeCardAdapter(getData());
+        HomeCardsAdapter adapter = new HomeCardsAdapter(getData());
         itemList.setAdapter(adapter);
 
     }

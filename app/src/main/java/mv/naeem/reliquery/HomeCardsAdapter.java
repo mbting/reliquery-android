@@ -14,11 +14,11 @@ import mv.naeem.reliquery.models.home.ItemPart;
 
 import java.util.List;
 
-public class PrimeCardAdapter extends RecyclerView.Adapter<PrimeCardAdapter.ItemViewHolder> {
+public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.ItemViewHolder> {
 
     List<Item> items;
 
-    PrimeCardAdapter(List<Item> items){
+    HomeCardsAdapter(List<Item> items){
         this.items = items;
     }
 
@@ -29,7 +29,7 @@ public class PrimeCardAdapter extends RecyclerView.Adapter<PrimeCardAdapter.Item
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.prime_card, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_card, viewGroup, false);
         ItemViewHolder ivh = new ItemViewHolder(v);
         return ivh;
     }
@@ -40,15 +40,14 @@ public class PrimeCardAdapter extends RecyclerView.Adapter<PrimeCardAdapter.Item
         itemViewHolder.vaulted.setVisibility((items.get(i).vaulted) ? View.VISIBLE : View.INVISIBLE);
 
         // add parts
-        itemViewHolder.items.removeAllViews();
+        itemViewHolder.parts.removeAllViews();
         for (ItemPart ip: items.get(i).parts) {
-            View v = LayoutInflater.from(itemViewHolder.items.getContext()).inflate(R.layout.prime_card_part, itemViewHolder.items, false);
-//            ImageView item_image = (ImageView) v.findViewById(R.id.prime_card_part_image);
-            TextView item_name = (TextView) v.findViewById(R.id.prime_card_part_name);
-            TextView item_chance = (TextView) v.findViewById(R.id.prime_card_part_chance);
+            View v = LayoutInflater.from(itemViewHolder.parts.getContext()).inflate(R.layout.home_card_part, itemViewHolder.parts, false);
+            TextView item_name = (TextView) v.findViewById(R.id.home_card_part_name);
+            TextView item_chance = (TextView) v.findViewById(R.id.home_card_part_chance);
             item_name.setText(ip.name);
             item_chance.setText(ip.chances);
-            itemViewHolder.items.addView(v);
+            itemViewHolder.parts.addView(v);
         }
     }
 
@@ -61,14 +60,14 @@ public class PrimeCardAdapter extends RecyclerView.Adapter<PrimeCardAdapter.Item
         CardView cv;
         TextView name;
         ImageView vaulted;
-        LinearLayout items;
+        LinearLayout parts;
 
          ItemViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.prime_card);
-            name = (TextView)itemView.findViewById(R.id.prime_card_title);
-            vaulted = (ImageView)itemView.findViewById(R.id.prime_card_vaulted);
-            items = (LinearLayout)itemView.findViewById(R.id.prime_card_parts);
+            cv = (CardView)itemView.findViewById(R.id.home_card);
+            name = (TextView)itemView.findViewById(R.id.home_card_title);
+            vaulted = (ImageView)itemView.findViewById(R.id.home_card_vaulted);
+            parts = (LinearLayout)itemView.findViewById(R.id.home_card_parts);
         }
     }
 }

@@ -8,7 +8,7 @@
         android:layout_marginBottom="@dimen/card_margin"
         android:layout_marginLeft="@dimen/card_margin"
         android:layout_marginRight="@dimen/card_margin"
-        android:id="@+id/prime_card">
+        android:id="@+id/home_card">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -17,13 +17,13 @@
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/prime_card_image_group">
+                android:id="@+id/home_card_imagegroup">
 
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_image_height"
                     app:srcCompat="@color/cardview_shadow_start_color"
-                    android:id="@+id/prime_card_image"/>
+                    android:id="@+id/home_card_image"/>
 
             <ImageView
                     android:layout_width="@dimen/card_vaulted_width"
@@ -31,7 +31,7 @@
                     app:srcCompat="@color/cardview_shadow_start_color"
                     android:layout_margin="@dimen/card_content_padding"
                     android:layout_gravity="end|top"
-                    android:id="@+id/prime_card_vaulted"/>
+                    android:id="@+id/home_card_vaulted"/>
 
             <TextView
                     android:text="TextView"
@@ -43,7 +43,7 @@
                     android:background="@color/colorBlack80"
                     android:layout_gravity="center|bottom"
                     android:textSize="@dimen/card_title_size"
-                    android:id="@+id/prime_card_title"/>
+                    android:id="@+id/home_card_title"/>
 
         </FrameLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/card_content_padding"
-                android:layout_below="@id/prime_card_image_group">
+                android:layout_below="@id/home_card_imagegroup">
 
             <HorizontalScrollView
                     android:layout_marginTop="@dimen/card_margin"
@@ -63,7 +63,7 @@
                     android:layout_height="fill_parent">
 
                 <LinearLayout
-                        android:id="@+id/prime_card_parts"
+                        android:id="@+id/home_card_parts"
                         android:orientation="horizontal"
                         android:layout_gravity="center"
                         android:gravity="center"
