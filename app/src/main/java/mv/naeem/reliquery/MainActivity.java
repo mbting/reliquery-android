@@ -1,60 +1,92 @@
 package mv.naeem.reliquery;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import mv.naeem.reliquery.api.ApiClient;
 import mv.naeem.reliquery.models.home.Item;
-import mv.naeem.reliquery.models.home.ItemPart;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final Context c = this;
+    private List<Item> data = new ArrayList<>();
+    private List<Item> filtered = new ArrayList<>();
+    private final HomeCardsAdapter adapter = new HomeCardsAdapter(filtered);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView itemList = (RecyclerView)findViewById(R.id.home_list);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        itemList.setLayoutManager(llm);
 
-        HomeCardsAdapter adapter = new HomeCardsAdapter(getData());
+        final RecyclerView itemList = (RecyclerView)findViewById(R.id.home_list);
+        LinearLayoutManager llm = new LinearLayoutManager(c);
+        itemList.setLayoutManager(llm);
         itemList.setAdapter(adapter);
 
+        ApiClient.getClient().home().enqueue(new Callback<List<Item>>(){
+            @Override
+            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+                data.addAll(response.body());
+                filtered.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<Item>> call, Throwable t) {
+                try {
+                    Toast.makeText(c,"Failed",Toast.LENGTH_LONG).show();
+                } catch (Exception e) { e.printStackTrace(); }
+            }
+        });
     }
 
-    public List<Item> getData() {
-        // mock data
-        List<Item> items = new ArrayList<>();
-        // item parts
-        List<ItemPart> itemparts = new ArrayList<>();
-        itemparts.add(new ItemPart(1, "Blueprint", "10% - 20%"));
-        itemparts.add(new ItemPart(2, "System", "10% - 20%"));
-        itemparts.add(new ItemPart(3, "Chasis", "10% - 20%"));
-        itemparts.add(new ItemPart(3, "Neuroptic", "10% - 20%"));
-        // item parts long
-        List<ItemPart> itemparts1 = new ArrayList<>();
-        itemparts1.add(new ItemPart(1, "Blueprint", "10% - 20%"));
-        itemparts1.add(new ItemPart(2, "System", "10% - 20%"));
-        itemparts1.add(new ItemPart(3, "Chasis", "10% - 20%"));
-        itemparts1.add(new ItemPart(3, "Neuroptic", "10% - 20%"));
-        itemparts1.add(new ItemPart(3, "New", "10% - 20%"));
-        // items
-        items.add(new Item(1, "Excalibur", true, itemparts));
-        items.add(new Item(1, "Volt", false, itemparts1));
-        items.add(new Item(1, "Mag", true, itemparts));
-        items.add(new Item(1, "Rhino", true, itemparts1));
-        items.add(new Item(1, "Nekros", false, itemparts1));
-        items.add(new Item(1, "Inaros", true, itemparts));
-        items.add(new Item(1, "Nova", true, itemparts));
-        items.add(new Item(1, "Chroma", false, itemparts1));
-        items.add(new Item(1, "Frost", true, itemparts));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) { return true; }
 
-        return items;
+            @Override
+            public boolean onQueryTextChange(final String query) {
+                if (query.length() == 0) {
+                    filtered.clear();
+                    filtered.addAll(data);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    filtered.clear();
+                    adapter.notifyDataSetChanged();
+                    for (Item i : data) {
+                        if (i.getName().toLowerCase().contains(query)) {
+                            filtered.add(i);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                return true;
+            }
+        });
+        return true;
+
     }
+
+
+
 
 }
 

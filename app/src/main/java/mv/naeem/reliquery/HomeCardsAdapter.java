@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import mv.naeem.reliquery.models.home.Item;
-import mv.naeem.reliquery.models.home.ItemPart;
+import mv.naeem.reliquery.models.home.Part;
 
 import java.util.List;
 
@@ -36,17 +36,17 @@ public class HomeCardsAdapter extends RecyclerView.Adapter<HomeCardsAdapter.Item
 
     @Override
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
-        itemViewHolder.name.setText(items.get(i).name);
-        itemViewHolder.vaulted.setVisibility((items.get(i).vaulted) ? View.VISIBLE : View.INVISIBLE);
+        itemViewHolder.name.setText(items.get(i).getName());
+        itemViewHolder.vaulted.setVisibility((items.get(i).getVaulted()) ? View.VISIBLE : View.INVISIBLE);
 
         // add parts
         itemViewHolder.parts.removeAllViews();
-        for (ItemPart ip: items.get(i).parts) {
+        for (Part ip: items.get(i).getParts()) {
             View v = LayoutInflater.from(itemViewHolder.parts.getContext()).inflate(R.layout.home_card_part, itemViewHolder.parts, false);
             TextView item_name = (TextView) v.findViewById(R.id.home_card_part_name);
             TextView item_chance = (TextView) v.findViewById(R.id.home_card_part_chance);
-            item_name.setText(ip.name);
-            item_chance.setText(ip.chances);
+            item_name.setText(ip.getName());
+            item_chance.setText(ip.getChances());
             itemViewHolder.parts.addView(v);
         }
     }

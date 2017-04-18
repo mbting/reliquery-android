@@ -1,10 +1,9 @@
 package mv.naeem.reliquery.models.home;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class Part {
 
     @SerializedName("id")
     @Expose
@@ -12,12 +11,9 @@ public class Item {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("vaulted")
+    @SerializedName("chances")
     @Expose
-    private Boolean vaulted;
-    @SerializedName("parts")
-    @Expose
-    private List<Part> parts = null;
+    private String chances;
 
     public Integer getId() {
         return id;
@@ -35,20 +31,12 @@ public class Item {
         this.name = name;
     }
 
-    public Boolean getVaulted() {
-        return vaulted;
+    public String getChances() {
+        return chances;
     }
 
-    public void setVaulted(Boolean vaulted) {
-        this.vaulted = vaulted;
-    }
-
-    public List<Part> getParts() {
-        return parts;
-    }
-
-    public void setParts(List<Part> parts) {
-        this.parts = parts;
+    public void setChances(String chances) {
+        this.chances = chances;
     }
 
 }
